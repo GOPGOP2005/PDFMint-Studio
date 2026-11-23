@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="PDFMint Studio — merge, split, compress, convert, edit, sign and secure PDFs in one clean workspace.">
+  <title>PDFMint Studio — Simple PDF tools</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css?v=20261112-v14-upload-sign">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a class="brand" href="#home" aria-label="PDFMint Studio home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><path d="M11 6h13l7 7v20H11a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3Z" fill="currentColor"/><path d="M24 6v8h8" stroke="#fff" stroke-width="2.3"/><path d="M14 23h12M14 28h9" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg></span>
+        <span class="brand-text">PDF<span>Mint</span></span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#/tools/merge">MERGE PDF</a>
+        <a href="#/tools/split">SPLIT PDF</a>
+        <a href="#/tools/compress">COMPRESS PDF</a>
+        <a href="#tools" data-nav="Convert to PDF">CONVERT PDF <span class="chev">⌄</span></a>
+        <a href="#tools" data-nav="all">ALL PDF TOOLS <span class="chev">⌄</span></a>
+      </nav>
+      <div class="header-actions">
+        <span class="local-badge">● Local workspace</span>
+        <a class="header-cta" href="#tools">All tools</a>
+      </div>
+      <button id="menuToggle" class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <div id="homeView">
+      <section class="hero" id="home">
+        <div class="hero-inner">
+          <h1>Every PDF tool you need, in one clean workspace</h1>
+          <p>Merge, split, compress, convert, edit, sign, protect and organize PDFs with a simple interface built to get out of your way.</p>
+          <div class="hero-pills" aria-label="Tool categories">
+            <button class="hero-pill active" type="button" data-home-filter="All tools">All</button>
+            <button class="hero-pill" type="button" data-home-filter="Workflows">Workflows</button>
+            <button class="hero-pill" type="button" data-home-filter="Organize">Organize PDF</button>
+            <button class="hero-pill" type="button" data-home-filter="Optimize">Optimize PDF</button>
+            <button class="hero-pill" type="button" data-home-filter="Convert from PDF">Convert PDF</button>
+            <button class="hero-pill" type="button" data-home-filter="Edit">Edit PDF</button>
+            <button class="hero-pill" type="button" data-home-filter="Security">PDF Security</button>
+            <button class="hero-pill" type="button" data-home-filter="Intelligence">PDF Intelligence</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="tools-section" id="tools">
+        <div class="tool-controls">
+          <div class="filters" id="filterBar" role="group" aria-label="Filter PDF tools"></div>
+          <div class="search-shell">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m16 16 5 5"></path></svg>
+            <input id="searchInput" type="search" placeholder="Search PDF tools" aria-label="Search PDF tools">
+          </div>
+        </div>
+        <div class="tools-grid" id="toolsGrid"></div>
+        <div id="emptyState" class="empty-state" hidden><h3>No tools found</h3><p>Try a different keyword or category.</p><button id="clearFilters" type="button">Show all tools</button></div>
+        <div class="tool-count-line"><span id="toolCount">34</span> tools available</div>
+      </section>
+
+      <section class="simple-value-section" id="how">
+        <div class="simple-value-inner">
+          <h2>Work your way</h2>
+          <div class="value-grid">
+            <article><div class="value-visual"><span>PDF</span><b>✓</b></div><h3>Fast on desktop</h3><p>Process documents locally with a clean, focused workflow.</p></article>
+            <article><div class="value-visual phone"><span>PDF</span><b>↗</b></div><h3>Easy on smaller screens</h3><p>Responsive controls keep the important actions close at hand.</p></article>
+            <article><div class="value-visual api"><span>{ }</span><b>⚙</b></div><h3>Ready for your own server</h3><p>Run the FastAPI backend yourself and keep control of your files.</p></article>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section id="workspaceView" class="workspace" hidden aria-label="PDF tool workspace">
+      <div class="workspace-upload-shell">
+        <div class="crumb"><a href="#home">Home</a><span>›</span><a href="#tools">All tools</a><span>›</span><span id="crumbName">PDF tool</span></div>
+        <div class="workspace-heading">
+          <div class="workspace-icon" id="workspaceIcon"></div>
+          <span class="workspace-kicker" id="workspaceCategory"></span>
+          <h1 id="workspaceTitle">PDF tool</h1>
+          <p id="workspaceDesc"></p>
+        </div>
+
+        <div class="workspace-layout">
+          <div class="workspace-main">
+            <div id="dropZone" class="drop-zone" role="button" tabindex="0" aria-label="Select files or drag and drop here">
+              <button type="button" class="select-main-btn" id="selectFiles">Select PDF file</button>
+              <button type="button" class="camera-btn" id="cameraBtn" hidden>Take a photo</button>
+              <p class="drop-copy">or drop files here</p>
+              <small id="uploadHint">PDF files · Max 80 MB total</small>
+            </div>
+            <input id="fileInput" class="visually-hidden" type="file" aria-label="Select files">
+            <input id="cameraInput" class="visually-hidden" type="file" accept="image/*" capture="environment">
+
+            <div id="selectedSection" class="selected-section" hidden>
+              <div class="selected-header"><h3><span id="fileCount">0</span> selected files</h3><button id="addMore" type="button" class="add-more">+ Add more</button></div>
+              <div id="filesList" class="file-list"></div>
+              <p class="reorder-tip" id="reorderTip">Use the arrows to change the order.</p>
+              <div id="filePreview" class="file-preview" hidden></div>
+            </div>
+          </div>
+
+          <aside class="settings-card">
+            <div class="settings-card-header"><div><h3>Options</h3><p>Adjust only what you need</p></div></div>
+            <form id="toolForm">
+              <div class="settings-fields" id="settingsFields"></div>
+              <div class="workspace-note" id="workspaceNote" hidden></div>
+              <div id="errorBox" class="error-box" role="alert" hidden></div>
+              <div id="progressBox" class="progress-box" hidden><div class="progress-top"><strong id="progressLabel">Uploading files…</strong><span id="progressPercent">0%</span></div><div class="progress-track"><div class="progress-bar" id="progressBar"></div></div></div>
+              <button id="processBtn" class="process-btn" type="submit" disabled>Choose files to continue</button>
+              <div class="settings-footnote">✓ Files processed in a temporary workspace</div>
+            </form>
+          </aside>
+        </div>
+      </div>
+
+      <div id="resultPanel" class="result-panel result-download-screen" hidden>
+        <div class="result-download-inner">
+          <h2 id="resultTitle">Your file is ready!</h2>
+          <div class="result-primary-row">
+            <button id="resultBackBtn" class="result-round-btn result-back-btn" type="button" aria-label="Back to tool">←</button>
+            <button id="downloadBtn" type="button" class="download-btn result-download-btn"><span class="download-glyph">⇩</span><span id="downloadBtnText">Download file</span></button>
+            <div class="result-side-actions">
+              <button id="newTaskBtn" type="button" class="result-round-btn" title="Process another file" aria-label="Process another file">＋</button>
+              <button id="deleteResultBtn" type="button" class="result-round-btn" title="Delete result from this session" aria-label="Delete result">⌫</button>
+            </div>
+          </div>
+          <small id="resultFilename" class="result-filename"></small>
+          <section class="continue-card" aria-label="Continue to another PDF tool">
+            <h3>Continue to…</h3>
+            <div id="suggestionList" class="continue-tools"></div>
+          </section>
+          <div class="result-privacy-note">Your processed file stays in this local session and can be cleared immediately.</div>
+        </div>
+      </div>
+      <div class="suggestions legacy-suggestions" hidden></div>
+    </section>
+  </main>
+
+  <footer class="footer"><div><a class="brand footer-brand" href="#home"><span class="brand-mark"><svg viewBox="0 0 40 40" fill="none"><path d="M11 6h13l7 7v20H11a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3Z" fill="currentColor"/><path d="M24 6v8h8" stroke="#fff" stroke-width="2.3"/></svg></span><span class="brand-text">PDF<span>Mint</span></span></a><p>Independent PDF toolkit. Not affiliated with iLovePDF.</p></div><span>© 2026 PDFMint Studio</span></footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js?v=20261114-v17-brand-downloads" defer></script>
+</body>
+</html>

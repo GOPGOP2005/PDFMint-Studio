@@ -1,0 +1,3 @@
+# Better positional PDF -> DOCX conversion. Without this package,
+# PDFMint extracts editable text into DOCX instead.
+pdf2docx>=0.5.8,<1
